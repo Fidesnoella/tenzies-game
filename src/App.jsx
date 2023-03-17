@@ -36,9 +36,7 @@ export default function App() {
 
   function rollDice() {
     if (!tenzies) {
-      setDice(oldDice => oldDice.map(die => {
-        return die.isHeld ? die : generateNewDie()
-      }))
+      setDice(oldDice => oldDice.map(die => die.isHeld ? die : generateNewDie()))
     } else {
       setTenzies(false)
       setDice(allNewDice())
@@ -46,9 +44,7 @@ export default function App() {
   }
 
   function holdDice(id) {
-    setDice(oldDice => oldDice.map(die => {
-      return die.id === id ? { ...die, isHeld: !die.isHeld } : die
-    }))
+    setDice(oldDice => oldDice.map(die => die.id === id ? { ...die, isHeld: !die.isHeld } : die))
   }
 
   return (
@@ -60,11 +56,7 @@ export default function App() {
             <h1 className="text-[#2B283A] font-bold text-[1.6rem] sm:text-[2.5rem] leading-[1.875rem] sm:leading-[2.9375rem] -tracking-[0.03em]">Tenzies</h1>
             <p className="text-[#4A4E74] pt-3 font-normal text-[0.8192rem] sm:text-[1.3125rem] leading-4 sm:leading-[1.5625rem] -tracking-[0.03em] max-w-[22.75rem] text-center">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="grid grid-cols-5 gap-2 sm:gap-4 pt-12 pb-10">
-              {dice.map(die => {
-                return (
-                  <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)} />
-                )
-              })}
+              {dice.map(die => <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)} />)}
             </div>
             <button className="bg-[#5035FF] text-white font-bold text-base sm:text-[1.6rem] sm:leading-7 leading-5 rounded-[0.2381rem] w-[5.76rem]- sm:w-[7.125rem]- px-8 h-[2.24rem] sm:h-14 hover:bg-[#6b57ed]" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
           </div>
